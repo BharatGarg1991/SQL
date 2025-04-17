@@ -1,0 +1,331 @@
+Database, tables, Constraints
+
+# Q 1
+
+create database amazon_db1;
+use amazon_db1;
+create table tbl_emp_detail_data
+(
+employeeid  int primary key,
+first_name char(20) not null,
+last_name char(20) not null,
+salary int,
+joining_date char(20),
+department char(20),
+gender char(20),
+job_title char (20),
+check (first_name <> last_name)
+);
+
+# Q 2
+
+INSERT INTO tbl_emp_detail_data VALUES 
+(101, 'Malli', 'G', 50000, '2020-09-20 11:16', 'IT', 'Male', 'Software Engineer'),
+(102, 'Venu', 'S', 55000, '2024-10-05 07:15', 'IT', 'Male', 'Software Engineer'),
+(103, 'Anjali', 'R', 62000, '2024-08-15 09:45', 'HR', 'Female', 'HR Manager'),
+(104, 'Rajesh', 'K', 48000, '2023-07-10 14:10', 'Finance', 'Male', 'Financial Analyst'),
+(105, 'Priya', 'M', 53000, '2024-06-25 18:30', 'IT', 'Female', 'Software Engineer'),
+(106, 'Arjun', 'B', 67000, '2024-09-05 12:25', 'Operations', 'Male', 'Unknown'),
+(107, 'Sneha', 'T', 60000, '2024-05-19 08:20', 'Marketing', 'Female', 'Marketing Executive'),
+(108, 'Vikram', 'P', 58000, '2024-04-30 17:55', 'IT', 'Male', 'Software Engineer'),
+(109, 'Kavita', 'L', 50000, '2023-03-15 11:05', 'HR', 'Female', 'HR Manager'),
+(110, 'Suresh', 'N', 62000, '2024-02-28 15:40', 'Finance', 'Male', 'Financial Analyst'),
+(111, 'Deepak', 'J', 65000, '2022-09-22 16:30', 'Operations', 'Male', 'Unknown'),
+(112, 'Roshni', 'D', 52000, '2022-11-12 10:12', 'IT', 'Female', 'Software Engineer'),
+(113, 'Sameer', 'C', 70000, '2024-10-18 13:45', 'Marketing', 'Male', 'Marketing Executive'),
+(114, 'Pooja', 'V', 56000, '2024-07-07 19:10', 'HR', 'Female', 'HR Manager'),
+(115, 'Harish', 'S', 48000, '2024-06-02 06:35', 'Finance', 'Male', 'Financial Analyst'),
+(116, 'Asha', 'Y', 51000, '2024-01-25 14:22', 'IT', 'Female', 'Software Engineer'),
+(117, 'Kiran', 'Z', 62000, '2021-04-18 18:55', 'Operations', 'Male', 'Unknown'),
+(118, 'Divya', 'M', 58000, '2024-03-29 08:11', 'Marketing', 'Female', 'Marketing Executive'),
+(119, 'Divya', 'M', 58000, '2024-03-29 08:11', 'Marketing', 'Female', 'Marketing Executive'),
+(120, 'Meena', 'A', 49000, '2020-01-05 16:25', 'IT', 'Female', 'Software Engineer');
+
+# Q 4
+select * from tbl_emp_detail_data;
+
+# Q 5
+select * from tbl_emp_detail_data order by  employeeid asc limit 1;
+
+# Q 6
+
+select * from tbl_emp_detail_data order by  employeeid desc limit 1;
+
+# Q 8 (i)
+select upper(first_name) first_name_upper  from  tbl_emp_detail_data ;
+
+# Q 8 (ii)
+select lower(first_name) first_name_lower  from  tbl_emp_detail_data ;
+
+# Q 9 (i)
+
+select * from tbl_emp_detail_data where first_name = 'Malli';
+
+# Q 9 (ii)
+
+select * from tbl_emp_detail_data where first_name in ('Malli', 'Meena', 'Anjali');
+
+
+# Q 9 (iii)
+
+select * from tbl_emp_detail_data where first_name not in ('Malli', 'Meena', 'Anjali');
+
+
+# Q 9 (iv)
+
+select * from tbl_emp_detail_data where first_name like 'v%';
+
+# Q 9 (v)
+
+select * from tbl_emp_detail_data where first_name like '%i';
+
+
+# Q 9 (vi)
+
+select * from tbl_emp_detail_data where first_name like '%o%';
+
+# Q 10
+
+select distinct department from tbl_emp_detail_data;
+
+# Q 11
+
+select count(*) from tbl_emp_detail_data;
+
+# Q 14 (i)
+select min(salary) from tbl_emp_detail_data;
+
+
+# Q 14 (ii)
+select max(salary) from tbl_emp_detail_data;
+
+
+# Q 14 (iii)
+select avg(salary) from tbl_emp_detail_data;
+
+
+# Q 14 (iv)
+
+select max(salary) - min(salary) difference_salary from tbl_emp_detail_data;
+
+
+# Q 15 (i)
+
+select rtrim(first_name) from tbl_emp_detail_data;
+
+
+# Q 15 (ii)
+
+select ltrim(first_name) from tbl_emp_detail_data;
+
+
+# Q 15 (iii)
+
+select trim(first_name) from tbl_emp_detail_data;
+
+
+# Q 16
+
+select count(*)  from tbl_emp_detail_data where salary > 50000;
+
+# Q 17
+
+select department, max(joining_date) recent_date from tbl_emp_detail_data group by department;
+
+Case Statements 
+
+use amazon_db;
+select * from tbl_emp_detail_data;
+# Q1
+select first_name,
+case
+when gender = 'Male' then 'M'
+else
+'F'
+end as gender
+from tbl_emp_detail_data;
+
+#Q2
+
+select first_name, salary,
+case 
+when salary > 60000 then 'High'
+when salary between 50000 and 60000 then 'Medium'
+else
+'Low'
+end as salary_catg
+from tbl_emp_detail_data;
+
+# Q3
+
+select  first_name, department,
+case
+when department = 'IT' then 'Technical'
+when department = 'HR' then 'Human Resources'
+when department = 'Finance' then 'Accounting'
+else
+'Other'
+end as department_classification
+from tbl_emp_detail_data;
+
+# Q4
+
+select first_name, salary,
+case
+when salary < 50000 then 'Eligible for Raise'
+else
+'Not Eligible'
+end as eligibility
+from tbl_emp_detail_data;
+
+# Q5
+
+select first_name, joining_date,
+case
+when joining_date < '2022-01-01' then 'Experienced'
+else
+'New Hire'
+end as employment_status
+from tbl_emp_detail_data ;
+
+# Q6
+select first_name, salary,
+case
+when salary > 60000 then .1*salary
+when salary between 50000 and 60000 then .07*salary
+else
+.05*salary
+end as bonus_amt
+from tbl_emp_detail_data;
+
+# Q 11
+
+select first_name, department,
+case
+when department = 'IT' and salary > 55000 then 'Senior IT Employee'
+else
+'Other'
+end as job_level
+from tbl_emp_detail_data;
+
+# Q 13
+
+select first_name, joining_date,
+case
+when joining_date < '2021-01-01' then '10 days leave'
+when joining_date between  '2021-01-01' and '2023-01-01' then  '20 days leave'
+else
+'25 days leave'
+end as leave_entitlement
+from tbl_emp_detail_data;
+
+# Q 17
+select first_name, salary,
+case
+when salary > avg(salary) then 'Above Average'
+else
+'Below Average'
+end as salary_comp
+from tbl_emp_detail_data;
+
+Joins 
+
+use amazon_db;
+
+select * from tbl_emp_detail_data ;
+select * from tbl_project_details ;
+
+# Q 1
+select a.first_name, b.project_name from tbl_emp_detail_data a inner join tbl_project_details b on a.emp_id = b.emp_id_no order by a.first_name asc;
+
+# Q 2
+select a.first_name, b.project_name from tbl_emp_detail_data a left  join tbl_project_details b on a.emp_id = b.emp_id_no order by a.first_name asc;
+
+# Q4
+
+select a.first_name, b.project_name from tbl_emp_detail_data a right join tbl_project_details b on a.emp_id = b.emp_id_no order by a.first_name asc;
+
+# Q 5
+
+select b.project_name from tbl_emp_detail_data a right join tbl_project_details b on a.emp_id = b.emp_id_no
+where a.first_name is null;
+
+# Q 6
+
+select a.first_name,  count(*) number from tbl_emp_detail_data a inner join tbl_project_details b on a.emp_id = b.emp_id_no
+group by a.first_name having count(*) >1;
+
+# Q 7
+
+select b.project_name , count(*) number from tbl_emp_detail_data a inner join tbl_project_details b on a.emp_id = b.emp_id_no
+group by b.project_name having count(*) >1;
+
+# Q 8
+
+select b.project_id, b.emp_id_no, b.project_name, b.start_date, b.end_date, b.status from  tbl_emp_detail_data a right join tbl_project_details b on a.emp_id = b.emp_id_no
+where a.emp_id is null;
+
+Group By
+
+use amazon_db;
+select * from tbl_emp_detail_data;
+# Q1 group by
+select department, sum(salary), count( emp_id) from tbl_emp_detail_data group by department order by sum(salary) desc;
+
+select * from tbl_project_details;
+
+# Q 2 group by  -- need only project_name ??
+
+select project_name  from tbl_project_details group by project_name having count(project_name) > 1;
+
+# Q3
+
+select department, count(*) as total , sum(salary) from tbl_emp_detail_data group by department ;
+
+# Q4
+
+select department, avg(salary) from tbl_emp_detail_data group by department order by avg(salary) asc;
+select department, max(salary) from tbl_emp_detail_data group by department order by max(salary) asc;
+
+select * from tbl_emp_detail_data;
+
+# Q 7
+select department, gender, count(*) from tbl_emp_detail_data group by department, gender order by department asc, gender asc;
+
+# Q 5
+select department, count(*), 
+case
+when count(*) >5 then 'Large'
+when count(*) between 3 and 5 then 'Medium'
+else
+'Small'
+end as Size_dept
+from tbl_emp_detail_data group by department;
+
+# Q 6
+select department, avg(salary), 
+case 
+when avg(salary) > 60000 then 'High Pay'
+when avg(salary) between  50000 and 60000 then 'Medium Pay'
+else
+'Low Pay'
+end as Pay_Levels
+from tbl_emp_detail_data
+group by department;
+
+# Q 8
+select department, max(salary),
+case
+when max(salary) > 70000 then 'Senior Leadership'
+else
+'Mid Level'
+end as job_level
+from tbl_emp_detail_data group by department;
+
+# Q10
+
+select department, count(*),
+case
+when count(*) > 2 then ' High Paying Team'
+end as dept_pay_type
+from tbl_emp_detail_data where salary > 60000 group by department ;
