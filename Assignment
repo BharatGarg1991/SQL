@@ -1,4 +1,4 @@
-Database, tables, Constraints
+########### Database, tables, Constraints
 
 # Q 1
 
@@ -19,7 +19,7 @@ check (first_name <> last_name)
 
 # Q 2
 
-INSERT INTO tbl_emp_detail_data VALUES 
+insert into tbl_emp_detail_data values 
 (101, 'Malli', 'G', 50000, '2020-09-20 11:16', 'IT', 'Male', 'Software Engineer'),
 (102, 'Venu', 'S', 55000, '2024-10-05 07:15', 'IT', 'Male', 'Software Engineer'),
 (103, 'Anjali', 'R', 62000, '2024-08-15 09:45', 'HR', 'Female', 'HR Manager'),
@@ -132,10 +132,8 @@ select count(*)  from tbl_emp_detail_data where salary > 50000;
 
 select department, max(joining_date) recent_date from tbl_emp_detail_data group by department;
 
-Case Statements 
+########### Case Statements 
 
-use amazon_db;
-select * from tbl_emp_detail_data;
 # Q1
 select first_name,
 case
@@ -228,12 +226,7 @@ else
 end as salary_comp
 from tbl_emp_detail_data;
 
-Joins 
-
-use amazon_db;
-
-select * from tbl_emp_detail_data ;
-select * from tbl_project_details ;
+########### Joins 
 
 # Q 1
 select a.first_name, b.project_name from tbl_emp_detail_data a inner join tbl_project_details b on a.emp_id = b.emp_id_no order by a.first_name asc;
@@ -265,10 +258,8 @@ group by b.project_name having count(*) >1;
 select b.project_id, b.emp_id_no, b.project_name, b.start_date, b.end_date, b.status from  tbl_emp_detail_data a right join tbl_project_details b on a.emp_id = b.emp_id_no
 where a.emp_id is null;
 
-Group By
+########### Group By
 
-use amazon_db;
-select * from tbl_emp_detail_data;
 # Q1 group by
 select department, sum(salary), count( emp_id) from tbl_emp_detail_data group by department order by sum(salary) desc;
 
